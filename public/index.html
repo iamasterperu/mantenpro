@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MantenPro · Control de mantenimiento</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f3f5f9;--card:#fff;--ink:#14213d;--mut:#667085;--pri:#1d4ed8;--ok:#16a34a;--warn:#d97706;--bad:#dc2626;--line:#e4e7ee}
+body{background:var(--bg);color:var(--ink);font-family:'Montserrat','Inter',system-ui,sans-serif;max-width:520px;margin:0 auto;min-height:100vh;padding-bottom:84px}
+.ribbon{background:#fde68a;color:#5b4300;text-align:center;font-weight:700;font-size:11px;padding:6px}
+header{background:var(--ink);color:#fff;padding:16px 18px 22px;border-radius:0 0 22px 22px}
+header .r{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:20px}.logo b{color:#60a5fa}
+.pl{font-size:12px;color:#aab4d4;margin-top:2px}
+.av{width:36px;height:36px;border-radius:50%;background:#2c3a63;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.kp div{background:#1f2e57;border-radius:14px;padding:12px 8px;text-align:center}
+.kp b{display:block;font-size:26px;line-height:1}.kp small{font-size:10.5px;color:#c4cdea}
+.kp .a b{color:#f87171}.kp .b b{color:#fbbf24}.kp .c b{color:#4ade80}
+main{padding:16px}
+h2{font-size:15px;margin:6px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.nm{font-weight:700;font-size:14.5px}.sb{font-size:12px;color:var(--mut);margin-top:2px}
+.pill{font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap}
+.p-bad{background:#fee2e2;color:#991b1b}.p-warn{background:#fef3c7;color:#92400e}.p-ok{background:#dcfce7;color:#166534}
+.bar{height:7px;background:#eceff5;border-radius:9px;margin-top:10px;overflow:hidden}.bar i{display:block;height:100%;border-radius:9px}
+.btn{border:0;background:var(--pri);color:#fff;font:700 12.5px 'Montserrat',sans-serif;padding:9px 13px;border-radius:10px;cursor:pointer}
+.btn.g{background:#eef2ff;color:var(--pri)}
+.acts{display:flex;gap:8px;margin-top:11px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:#fff;border-top:1px solid var(--line);display:flex;padding:8px 6px 14px}
+nav button{flex:1;border:0;background:none;font:600 11px 'Montserrat',sans-serif;color:var(--mut);padding:6px 0;cursor:pointer}
+nav button span{display:block;font-size:20px;margin-bottom:2px}nav button.on{color:var(--pri)}
+.chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px}.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font:700 12px 'Montserrat',sans-serif;white-space:nowrap;cursor:pointer;color:var(--ink)}.chip.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.tl{border-left:3px solid var(--line);margin-left:8px;padding-left:14px}
+.tl .it{position:relative;margin-bottom:14px}.tl .it:before{content:"";position:absolute;left:-21px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--pri);border:2px solid var(--bg)}
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#14213d;color:#fff;padding:11px 18px;border-radius:12px;font-size:13px;font-weight:600;display:none;z-index:9}
+.foot{text-align:center;color:var(--mut);font-size:11px;margin:16px 0}
+</style></head><body>
+<div class="ribbon">EJEMPLO ILUSTRATIVO · datos de muestra · IAMASTER</div>
+<header><div class="r"><div><div class="logo">Manten<b>Pro</b></div><div class="pl">Planta principal · Área de mantenimiento</div></div><div class="av">JM</div></div>
+<div class="kp"><div class="a"><b id="k1">0</b><small>Vencidos</small></div><div class="b"><b id="k2">0</b><small>Próximos 7 días</small></div><div class="c"><b id="k3">0</b><small>Al día</small></div></div></header>
+<main id="m"></main>
+<nav><button data-t="panel" class="on"><span>📊</span>Panel</button><button data-t="equipos"><span>⚙️</span>Equipos</button><button data-t="agenda"><span>📅</span>Agenda</button><button data-t="historial"><span>🧾</span>Historial</button></nav>
+<div class="toast" id="ts"></div>
+<script>
+var D=864e5,T0=new Date();T0.setHours(0,0,0,0);
+function dd(n){return new Date(T0.getTime()+n*D)}
+var E=[
+["Compresor de aire 01","Sala de máquinas","Preventivo mensual",30,-34],
+["Bomba de agua B-02","Cuarto de bombas","Revisión de sellos",45,-12],
+["Generador eléctrico","Patio técnico","Cambio de aceite y filtros",90,-86],
+["Faja transportadora 3","Línea de producción","Lubricación y tensado",15,-9],
+["Montacargas M-04","Almacén","Inspección general",60,-50],
+["Aire acondicionado AC-07","Oficinas","Limpieza de filtros",30,-26],
+["Tablero eléctrico TG-1","Subestación","Termografía",180,-100],
+["Grúa puente 5 t","Nave A","Inspección de cables",90,-40],
+["Chiller central","Sala de máquinas","Limpieza de condensador",120,-20],
+["Extractor de aire X-11","Taller","Cambio de rodamientos",60,-30]];
+var EQ=E.map(function(e,i){return{id:i,n:e[0],a:e[1],t:e[2],f:e[3],u:dd(e[4]),tec:["Carlos R.","Luis P.","Ana T."][i%3]}});
+var H=[["Compresor de aire 01","Preventivo mensual","Carlos R.",-34],["Montacargas M-04","Inspección general","Luis P.",-50],["Chiller central","Limpieza de condensador","Ana T.",-20],["Faja transportadora 3","Lubricación y tensado","Luis P.",-9],["Bomba de agua B-02","Revisión de sellos","Carlos R.",-12]].map(function(h){return{n:h[0],t:h[1],tec:h[2],d:dd(h[3])}});
+function nx(e){return new Date(e.u.getTime()+e.f*D)}
+function dias(e){return Math.round((nx(e)-T0)/D)}
+function st(e){var x=dias(e);return x<0?"bad":x<=7?"warn":"ok"}
+function fmt(d){return d.toLocaleDateString("es-PE",{day:"2-digit",month:"short"})}
+function pill(e){var x=dias(e),s=st(e);return '<span class="pill p-'+s+'">'+(x<0?'Vencido hace '+(-x)+' d':x==0?'Hoy':'En '+x+' d')+'</span>'}
+function pct(e){var x=Math.max(0,Math.min(1,1-dias(e)/e.f));return Math.round(x*100)}
+function col(e){return{bad:"#dc2626",warn:"#d97706",ok:"#16a34a"}[st(e)]}
+var tab="panel",flt="Todos";
+function card(e,full){return '<div class="card"><div class="row"><div><div class="nm">'+e.n+'</div><div class="sb">'+e.a+' · '+e.t+'</div></div>'+pill(e)+'</div><div class="bar"><i style="width:'+pct(e)+'%;background:'+col(e)+'"></i></div>'+(full?'<div class="sb" style="margin-top:8px">Próximo: <b>'+fmt(nx(e))+'</b> · cada '+e.f+' días · Técnico: '+e.tec+'</div>':'')+'<div class="acts"><button class="btn" onclick="reg('+e.id+')">✔ Registrar mantenimiento</button><button class="btn g" onclick="toast(\'Orden de trabajo creada y asignada a '+e.tec+'\')">Crear orden</button></div></div>'}
+function kpis(){var c={bad:0,warn:0,ok:0};EQ.forEach(function(e){c[st(e)]++});document.getElementById("k1").textContent=c.bad;document.getElementById("k2").textContent=c.warn;document.getElementById("k3").textContent=c.ok}
+function render(){kpis();var m=document.getElementById("m"),h="";
+if(tab=="panel"){var u=EQ.slice().sort(function(a,b){return dias(a)-dias(b)}).slice(0,4);h+='<h2>Requieren atención</h2>'+u.map(function(e){return card(e,false)}).join("")}
+if(tab=="equipos"){var f=["Todos","Vencidos","Próximos","Al día"];h+='<div class="chips">'+f.map(function(x){return '<button class="chip'+(x==flt?' on':'')+'" onclick="flt=\''+x+'\';render()">'+x+'</button>'}).join("")+'</div>';var L=EQ.filter(function(e){return flt=="Todos"||(flt=="Vencidos"&&st(e)=="bad")||(flt=="Próximos"&&st(e)=="warn")||(flt=="Al día"&&st(e)=="ok")});h+=L.map(function(e){return card(e,true)}).join("")||'<div class="card sb">Sin equipos en esta lista.</div>'}
+if(tab=="agenda"){var s=EQ.slice().sort(function(a,b){return nx(a)-nx(b)});h+='<h2>Próximos mantenimientos</h2><div class="tl">'+s.map(function(e){return '<div class="it"><div class="sb"><b>'+fmt(nx(e))+'</b></div><div class="nm">'+e.n+'</div><div class="sb">'+e.t+' · '+e.tec+'</div></div>'}).join("")+'</div>'}
+if(tab=="historial"){h+='<h2>Mantenimientos realizados</h2>'+H.slice().sort(function(a,b){return b.d-a.d}).map(function(x){return '<div class="card"><div class="row"><div><div class="nm">'+x.n+'</div><div class="sb">'+x.t+' · '+x.tec+'</div></div><span class="pill p-ok">'+fmt(x.d)+'</span></div></div>'}).join("")}
+h+='<div class="foot">MantenPro · sistema a medida creado por IAMASTER</div>';m.innerHTML=h}
+function toast(t){var e=document.getElementById("ts");e.textContent=t;e.style.display="block";setTimeout(function(){e.style.display="none"},2000)}
+function reg(i){var e=EQ[i];e.u=new Date(T0);H.push({n:e.n,t:e.t,tec:e.tec,d:new Date(T0)});toast("✔ "+e.n+" registrado. Próximo: "+fmt(nx(e)));render()}
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){tab=b.dataset.t;document.querySelectorAll("nav button").forEach(function(x){x.classList.toggle("on",x==b)});render();scrollTo(0,0)}});
+var q=new URLSearchParams(location.search).get("tab");if(q){document.querySelector('nav button[data-t="'+q+'"]').click()}else render();
+</script></body></html>
