@@ -1,77 +1,119 @@
 <!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MantenPro · Control de mantenimiento</title><style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f3f5f9;--card:#fff;--ink:#14213d;--mut:#667085;--pri:#1d4ed8;--ok:#16a34a;--warn:#d97706;--bad:#dc2626;--line:#e4e7ee}
-body{background:var(--bg);color:var(--ink);font-family:'Montserrat','Inter',system-ui,sans-serif;max-width:520px;margin:0 auto;min-height:100vh;padding-bottom:84px}
-.ribbon{background:#fde68a;color:#5b4300;text-align:center;font-weight:700;font-size:11px;padding:6px}
-header{background:var(--ink);color:#fff;padding:16px 18px 22px;border-radius:0 0 22px 22px}
-header .r{display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:800;font-size:20px}.logo b{color:#60a5fa}
-.pl{font-size:12px;color:#aab4d4;margin-top:2px}
-.av{width:36px;height:36px;border-radius:50%;background:#2c3a63;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
-.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
-.kp div{background:#1f2e57;border-radius:14px;padding:12px 8px;text-align:center}
-.kp b{display:block;font-size:26px;line-height:1}.kp small{font-size:10.5px;color:#c4cdea}
-.kp .a b{color:#f87171}.kp .b b{color:#fbbf24}.kp .c b{color:#4ade80}
-main{padding:16px}
-h2{font-size:15px;margin:6px 0 10px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:10px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.nm{font-weight:700;font-size:14.5px}.sb{font-size:12px;color:var(--mut);margin-top:2px}
-.pill{font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap}
-.p-bad{background:#fee2e2;color:#991b1b}.p-warn{background:#fef3c7;color:#92400e}.p-ok{background:#dcfce7;color:#166534}
-.bar{height:7px;background:#eceff5;border-radius:9px;margin-top:10px;overflow:hidden}.bar i{display:block;height:100%;border-radius:9px}
-.btn{border:0;background:var(--pri);color:#fff;font:700 12.5px 'Montserrat',sans-serif;padding:9px 13px;border-radius:10px;cursor:pointer}
-.btn.g{background:#eef2ff;color:var(--pri)}
-.acts{display:flex;gap:8px;margin-top:11px}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:#fff;border-top:1px solid var(--line);display:flex;padding:8px 6px 14px}
-nav button{flex:1;border:0;background:none;font:600 11px 'Montserrat',sans-serif;color:var(--mut);padding:6px 0;cursor:pointer}
-nav button span{display:block;font-size:20px;margin-bottom:2px}nav button.on{color:var(--pri)}
-.chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px}.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font:700 12px 'Montserrat',sans-serif;white-space:nowrap;cursor:pointer;color:var(--ink)}.chip.on{background:var(--pri);color:#fff;border-color:var(--pri)}
-.tl{border-left:3px solid var(--line);margin-left:8px;padding-left:14px}
-.tl .it{position:relative;margin-bottom:14px}.tl .it:before{content:"";position:absolute;left:-21px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--pri);border:2px solid var(--bg)}
-.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#14213d;color:#fff;padding:11px 18px;border-radius:12px;font-size:13px;font-weight:600;display:none;z-index:9}
-.foot{text-align:center;color:var(--mut);font-size:11px;margin:16px 0}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--bg:#f2f5fb;--ink:#12203f;--mut:#64708a;--pri:#2563eb;--pri2:#1d4ed8;--ok:#16a34a;--warn:#f59e0b;--bad:#ef4444;--line:#e3e8f2;--card:#fff}
+body{background:var(--bg);color:var(--ink);font-family:'Montserrat','Segoe UI',system-ui,sans-serif;max-width:560px;margin:0 auto;min-height:100vh;padding-bottom:40px;font-size:15px}
+.demo{background:#fef3c7;color:#7a5200;text-align:center;font-weight:700;font-size:11px;padding:6px}
+header{background:linear-gradient(160deg,#12203f,#1e3a8a);color:#fff;padding:18px 18px 70px;border-radius:0 0 28px 28px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:22px}.logo b{color:#7db3ff}
+.sub{font-size:12px;color:#b8c4e6;margin-top:2px}
+.hi{display:flex;align-items:center;gap:16px;margin-top:18px}
+.ring{width:92px;height:92px;position:relative;flex:none}
+.ring svg{transform:rotate(-90deg)}.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px}
+.hi p{font-size:15px;line-height:1.35;color:#dbe4ff}.hi p strong{color:#fff;font-size:17px;display:block;margin-bottom:2px}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:-50px 16px 14px}
+.big{border:0;border-radius:18px;padding:16px 10px;font:700 14px 'Montserrat',sans-serif;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 20px rgba(18,32,63,.14);transition:transform .12s}
+.big:active{transform:scale(.96)}.big span{font-size:28px}
+.b1{background:var(--ok);color:#fff}.b2{background:var(--pri);color:#fff}.b3{background:#fff;color:var(--ink)}.b4{background:#fff;color:var(--ink)}
+.tabs{display:flex;gap:6px;padding:0 16px;margin-bottom:14px;overflow-x:auto}
+.tab{flex:1;border:0;background:#e6ebf6;color:var(--mut);font:700 13px 'Montserrat',sans-serif;padding:12px 8px;border-radius:12px;cursor:pointer;white-space:nowrap}
+.tab.on{background:var(--ink);color:#fff}
+main{padding:0 16px}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.k{background:var(--card);border-radius:16px;padding:12px 6px;text-align:center;border:2px solid transparent;cursor:pointer}
+.k b{display:block;font-size:28px;line-height:1.1}.k small{font-size:11px;color:var(--mut);font-weight:600}
+.k.bad b{color:var(--bad)}.k.warn b{color:var(--warn)}.k.ok b{color:var(--ok)}
+h2{font-size:16px;margin:4px 0 10px}
+.card{background:var(--card);border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(18,32,63,.05);border-left:6px solid var(--line)}
+.card.bad{border-left-color:var(--bad)}.card.warn{border-left-color:var(--warn)}.card.ok{border-left-color:var(--ok)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.nm{font-weight:800;font-size:15.5px}.sb{font-size:12.5px;color:var(--mut);margin-top:3px;line-height:1.4}
+.pill{font-size:12px;font-weight:800;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.pill.bad{background:#fee2e2;color:#b91c1c}.pill.warn{background:#fef3c7;color:#92400e}.pill.ok{background:#dcfce7;color:#166534}.pill.blue{background:#dbeafe;color:#1e40af}
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.btn{border:0;border-radius:12px;padding:13px 8px;font:700 13.5px 'Montserrat',sans-serif;cursor:pointer;background:#eaf0ff;color:var(--pri2)}
+.btn.g{background:var(--ok);color:#fff}.btn.p{background:var(--pri);color:#fff}.btn.w{width:100%}
+.search{width:100%;border:2px solid var(--line);border-radius:14px;padding:14px;font:600 15px 'Montserrat',sans-serif;margin-bottom:10px;background:#fff}
+.chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px}.chip{border:2px solid var(--line);background:#fff;border-radius:999px;padding:9px 15px;font:700 13px 'Montserrat',sans-serif;cursor:pointer;white-space:nowrap;color:var(--ink)}.chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.bar{height:8px;background:#e8ecf5;border-radius:9px;margin-top:11px;overflow:hidden}.bar i{display:block;height:100%;border-radius:9px;transition:width .5s}
+.empty{text-align:center;color:var(--mut);padding:30px 10px;font-weight:600}
+.modal{position:fixed;inset:0;background:rgba(10,18,40,.55);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.modal.on{display:flex}
+.sheet{background:#fff;width:100%;max-width:560px;border-radius:24px 24px 0 0;padding:20px 18px 26px;max-height:92vh;overflow:auto;animation:up .25s}
+@keyframes up{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+.sheet h3{font-size:19px;margin-bottom:4px}.sheet .d{color:var(--mut);font-size:13px;margin-bottom:14px}
+label{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+select,input[type=text],input[type=number],textarea{width:100%;border:2px solid var(--line);border-radius:12px;padding:13px;font:600 15px 'Montserrat',sans-serif;background:#fff;color:var(--ink)}
+.seg{display:flex;gap:8px}.seg button{flex:1;border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px 4px;font:700 13px 'Montserrat',sans-serif;cursor:pointer}.seg button.on{border-color:var(--pri);background:#eaf0ff;color:var(--pri2)}
+.two{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin-top:18px}
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%) translateY(-90px);background:var(--ink);color:#fff;padding:13px 20px;border-radius:14px;font-weight:700;font-size:14px;z-index:40;transition:transform .3s;max-width:92%;text-align:center}
+.toast.on{transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;color:var(--mut);font-size:11.5px;margin:18px 0 0}.foot a{color:var(--pri);cursor:pointer;font-weight:700}
+.guide{background:#eaf0ff;color:#1e3a8a;border-radius:14px;padding:12px 14px;font-size:13px;font-weight:600;margin-bottom:12px;line-height:1.45}
 </style></head><body>
-<div class="ribbon">EJEMPLO ILUSTRATIVO · datos de muestra · IAMASTER</div>
-<header><div class="r"><div><div class="logo">Manten<b>Pro</b></div><div class="pl">Planta principal · Área de mantenimiento</div></div><div class="av">JM</div></div>
-<div class="kp"><div class="a"><b id="k1">0</b><small>Vencidos</small></div><div class="b"><b id="k2">0</b><small>Próximos 7 días</small></div><div class="c"><b id="k3">0</b><small>Al día</small></div></div></header>
+<div class="demo">EJEMPLO ILUSTRATIVO · datos de muestra</div>
+<header><div class="top"><div><div class="logo">Manten<b>Pro</b></div><div class="sub" id="fecha"></div></div></div>
+<div class="hi"><div class="ring"><svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="#2c4182" stroke-width="10"/><circle id="arc" cx="46" cy="46" r="38" fill="none" stroke="#4ade80" stroke-width="10" stroke-linecap="round" stroke-dasharray="239" stroke-dashoffset="239" style="transition:stroke-dashoffset .8s"/></svg><b id="pc">0%</b></div>
+<p><strong id="hl">Hola 👋</strong><span id="hs"></span></p></div></header>
+<div class="acts">
+<button class="big b1" onclick="openReg()"><span>✅</span>Registrar<br>mantenimiento</button>
+<button class="big b2" onclick="openOrd()"><span>📋</span>Nueva orden<br>de trabajo</button>
+<button class="big b3" onclick="openEq()"><span>➕</span>Agregar<br>equipo</button>
+<button class="big b4" onclick="go('agenda')"><span>📅</span>Ver<br>agenda</button></div>
+<div class="tabs" id="tabs"></div>
 <main id="m"></main>
-<nav><button data-t="panel" class="on"><span>📊</span>Panel</button><button data-t="equipos"><span>⚙️</span>Equipos</button><button data-t="agenda"><span>📅</span>Agenda</button><button data-t="historial"><span>🧾</span>Historial</button></nav>
+<div class="modal" id="md" onclick="if(event.target==this)cl()"><div class="sheet" id="sh"></div></div>
 <div class="toast" id="ts"></div>
 <script>
 var D=864e5,T0=new Date();T0.setHours(0,0,0,0);
 function dd(n){return new Date(T0.getTime()+n*D)}
-var E=[
-["Compresor de aire 01","Sala de máquinas","Preventivo mensual",30,-34],
-["Bomba de agua B-02","Cuarto de bombas","Revisión de sellos",45,-12],
-["Generador eléctrico","Patio técnico","Cambio de aceite y filtros",90,-86],
-["Faja transportadora 3","Línea de producción","Lubricación y tensado",15,-9],
-["Montacargas M-04","Almacén","Inspección general",60,-50],
-["Aire acondicionado AC-07","Oficinas","Limpieza de filtros",30,-26],
-["Tablero eléctrico TG-1","Subestación","Termografía",180,-100],
-["Grúa puente 5 t","Nave A","Inspección de cables",90,-40],
-["Chiller central","Sala de máquinas","Limpieza de condensador",120,-20],
-["Extractor de aire X-11","Taller","Cambio de rodamientos",60,-30]];
-var EQ=E.map(function(e,i){return{id:i,n:e[0],a:e[1],t:e[2],f:e[3],u:dd(e[4]),tec:["Carlos R.","Luis P.","Ana T."][i%3]}});
-var H=[["Compresor de aire 01","Preventivo mensual","Carlos R.",-34],["Montacargas M-04","Inspección general","Luis P.",-50],["Chiller central","Limpieza de condensador","Ana T.",-20],["Faja transportadora 3","Lubricación y tensado","Luis P.",-9],["Bomba de agua B-02","Revisión de sellos","Carlos R.",-12]].map(function(h){return{n:h[0],t:h[1],tec:h[2],d:dd(h[3])}});
-function nx(e){return new Date(e.u.getTime()+e.f*D)}
-function dias(e){return Math.round((nx(e)-T0)/D)}
+var TEC=["Carlos R.","Luis P.","Ana T."];
+function seed(){var E=[["Compresor de aire 01","Sala de máquinas","Mantenimiento mensual",30,-34],["Bomba de agua B-02","Cuarto de bombas","Revisión de sellos",45,-12],["Generador eléctrico","Patio técnico","Cambio de aceite y filtros",90,-86],["Faja transportadora 3","Línea de producción","Engrase y ajuste",15,-9],["Montacargas M-04","Almacén","Inspección general",60,-50],["Aire acondicionado AC-07","Oficinas","Limpieza de filtros",30,-26],["Tablero eléctrico TG-1","Subestación","Revisión térmica",180,-100],["Grúa puente 5 t","Nave A","Revisión de cables",90,-40],["Chiller central","Sala de máquinas","Limpieza del condensador",120,-20],["Extractor de aire X-11","Taller","Cambio de rodamientos",60,-30]];
+return{eq:E.map(function(e,i){return{id:i,n:e[0],a:e[1],t:e[2],f:e[3],u:dd(e[4]).getTime(),tec:TEC[i%3]}}),
+his:[["Compresor de aire 01","Mantenimiento mensual","Carlos R.",-34],["Montacargas M-04","Inspección general","Luis P.",-50],["Chiller central","Limpieza del condensador","Ana T.",-20],["Bomba de agua B-02","Revisión de sellos","Carlos R.",-12],["Faja transportadora 3","Engrase y ajuste","Luis P.",-9]].map(function(h){return{n:h[0],t:h[1],tec:h[2],d:dd(h[3]).getTime()}}),
+ord:[{n:"Faja transportadora 3",p:"Hace ruido al arrancar",pr:"Alta",tec:"Luis P.",e:1,d:dd(-1).getTime()},{n:"Aire acondicionado AC-07",p:"No enfría bien",pr:"Media",tec:"Ana T.",e:0,d:dd(0).getTime()}],nid:10}}
+var S;try{S=JSON.parse(localStorage.getItem("mp1"))}catch(e){}
+if(!S)S=seed();
+function save(){try{localStorage.setItem("mp1",JSON.stringify(S))}catch(e){}}
+function nx(e){return e.u+e.f*D}
+function dias(e){return Math.round((nx(e)-T0.getTime())/D)}
 function st(e){var x=dias(e);return x<0?"bad":x<=7?"warn":"ok"}
-function fmt(d){return d.toLocaleDateString("es-PE",{day:"2-digit",month:"short"})}
-function pill(e){var x=dias(e),s=st(e);return '<span class="pill p-'+s+'">'+(x<0?'Vencido hace '+(-x)+' d':x==0?'Hoy':'En '+x+' d')+'</span>'}
-function pct(e){var x=Math.max(0,Math.min(1,1-dias(e)/e.f));return Math.round(x*100)}
-function col(e){return{bad:"#dc2626",warn:"#d97706",ok:"#16a34a"}[st(e)]}
-var tab="panel",flt="Todos";
-function card(e,full){return '<div class="card"><div class="row"><div><div class="nm">'+e.n+'</div><div class="sb">'+e.a+' · '+e.t+'</div></div>'+pill(e)+'</div><div class="bar"><i style="width:'+pct(e)+'%;background:'+col(e)+'"></i></div>'+(full?'<div class="sb" style="margin-top:8px">Próximo: <b>'+fmt(nx(e))+'</b> · cada '+e.f+' días · Técnico: '+e.tec+'</div>':'')+'<div class="acts"><button class="btn" onclick="reg('+e.id+')">✔ Registrar mantenimiento</button><button class="btn g" onclick="toast(\'Orden de trabajo creada y asignada a '+e.tec+'\')">Crear orden</button></div></div>'}
-function kpis(){var c={bad:0,warn:0,ok:0};EQ.forEach(function(e){c[st(e)]++});document.getElementById("k1").textContent=c.bad;document.getElementById("k2").textContent=c.warn;document.getElementById("k3").textContent=c.ok}
-function render(){kpis();var m=document.getElementById("m"),h="";
-if(tab=="panel"){var u=EQ.slice().sort(function(a,b){return dias(a)-dias(b)}).slice(0,4);h+='<h2>Requieren atención</h2>'+u.map(function(e){return card(e,false)}).join("")}
-if(tab=="equipos"){var f=["Todos","Vencidos","Próximos","Al día"];h+='<div class="chips">'+f.map(function(x){return '<button class="chip'+(x==flt?' on':'')+'" onclick="flt=\''+x+'\';render()">'+x+'</button>'}).join("")+'</div>';var L=EQ.filter(function(e){return flt=="Todos"||(flt=="Vencidos"&&st(e)=="bad")||(flt=="Próximos"&&st(e)=="warn")||(flt=="Al día"&&st(e)=="ok")});h+=L.map(function(e){return card(e,true)}).join("")||'<div class="card sb">Sin equipos en esta lista.</div>'}
-if(tab=="agenda"){var s=EQ.slice().sort(function(a,b){return nx(a)-nx(b)});h+='<h2>Próximos mantenimientos</h2><div class="tl">'+s.map(function(e){return '<div class="it"><div class="sb"><b>'+fmt(nx(e))+'</b></div><div class="nm">'+e.n+'</div><div class="sb">'+e.t+' · '+e.tec+'</div></div>'}).join("")+'</div>'}
-if(tab=="historial"){h+='<h2>Mantenimientos realizados</h2>'+H.slice().sort(function(a,b){return b.d-a.d}).map(function(x){return '<div class="card"><div class="row"><div><div class="nm">'+x.n+'</div><div class="sb">'+x.t+' · '+x.tec+'</div></div><span class="pill p-ok">'+fmt(x.d)+'</span></div></div>'}).join("")}
-h+='<div class="foot">MantenPro · sistema a medida creado por IAMASTER</div>';m.innerHTML=h}
-function toast(t){var e=document.getElementById("ts");e.textContent=t;e.style.display="block";setTimeout(function(){e.style.display="none"},2000)}
-function reg(i){var e=EQ[i];e.u=new Date(T0);H.push({n:e.n,t:e.t,tec:e.tec,d:new Date(T0)});toast("✔ "+e.n+" registrado. Próximo: "+fmt(nx(e)));render()}
-document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){tab=b.dataset.t;document.querySelectorAll("nav button").forEach(function(x){x.classList.toggle("on",x==b)});render();scrollTo(0,0)}});
-var q=new URLSearchParams(location.search).get("tab");if(q){document.querySelector('nav button[data-t="'+q+'"]').click()}else render();
+function fmt(t){return new Date(t).toLocaleDateString("es-PE",{day:"numeric",month:"short"})}
+function txt(e){var x=dias(e);return x<0?"Atrasado "+(-x)+" d":x==0?"Es hoy":x==1?"Mañana":"En "+x+" días"}
+function pct(e){return Math.round(Math.max(0,Math.min(1,1-dias(e)/e.f))*100)}
+function col(e){return{bad:"#ef4444",warn:"#f59e0b",ok:"#16a34a"}[st(e)]}
+function cnt(){var c={bad:0,warn:0,ok:0};S.eq.forEach(function(e){c[st(e)]++});return c}
+var tab="inicio",flt="Todos",q="";
+var TABS=[["inicio","🏠 Inicio"],["equipos","⚙️ Equipos"],["ordenes","📋 Órdenes"],["agenda","📅 Agenda"],["historial","🧾 Historial"]];
+document.getElementById("fecha").textContent=new Date().toLocaleDateString("es-PE",{weekday:"long",day:"numeric",month:"long"})+" · Planta principal";
+function go(t){tab=t;render();scrollTo({top:0,behavior:"smooth"})}
+function toast(t){var e=document.getElementById("ts");e.textContent=t;e.classList.add("on");clearTimeout(window._t);window._t=setTimeout(function(){e.classList.remove("on")},2400)}
+function cl(){document.getElementById("md").classList.remove("on")}
+function op(h){document.getElementById("sh").innerHTML=h;document.getElementById("md").classList.add("on")}
+function card(e,full){var s=st(e);return '<div class="card '+s+'"><div class="row"><div><div class="nm">'+e.n+'</div><div class="sb">📍 '+e.a+'<br>🔧 '+e.t+(full?'<br>👷 '+e.tec+' · cada '+e.f+' días · próximo: <b>'+fmt(nx(e))+'</b>':'')+'</div></div><span class="pill '+s+'">'+txt(e)+'</span></div><div class="bar"><i style="width:'+pct(e)+'%;background:'+col(e)+'"></i></div><div class="mini"><button class="btn g" onclick="done('+e.id+')">✔ Ya lo hice hoy</button><button class="btn" onclick="openOrd('+e.id+')">📋 Pedir arreglo</button></div></div>'}
+function done(i){var e=S.eq.filter(function(x){return x.id==i})[0];e.u=T0.getTime();S.his.push({n:e.n,t:e.t,tec:e.tec,d:T0.getTime()});save();toast("✅ Listo: "+e.n+". Próximo: "+fmt(nx(e)));render()}
+function head(){var c=cnt(),n=S.eq.length,p=n?Math.round(c.ok/n*100):0;document.getElementById("pc").textContent=p+"%";document.getElementById("arc").style.strokeDashoffset=239-239*p/100;
+document.getElementById("hl").textContent=c.bad?"Tienes "+c.bad+" pendiente"+(c.bad>1?"s":"")+" atrasado"+(c.bad>1?"s":""):c.warn?"Sin atrasos 👍":"Todo al día 🎉";document.getElementById("hs").textContent=c.bad?"Empieza por los marcados en rojo.":c.warn?c.warn+" vencen esta semana.":"Buen trabajo, nada urgente."}
+function render(){head();var m=document.getElementById("m"),h="",c=cnt();
+document.getElementById("tabs").innerHTML=TABS.map(function(t){return '<button class="tab'+(t[0]==tab?' on':'')+'" onclick="go(\''+t[0]+'\')">'+t[1]+'</button>'}).join("");
+if(tab=="inicio"){h+='<div class="kp"><div class="k bad" onclick="flt=\'Atrasados\';go(\'equipos\')"><b>'+c.bad+'</b><small>Atrasados</small></div><div class="k warn" onclick="flt=\'Esta semana\';go(\'equipos\')"><b>'+c.warn+'</b><small>Esta semana</small></div><div class="k ok" onclick="flt=\'Al día\';go(\'equipos\')"><b>'+c.ok+'</b><small>Al día</small></div></div><div class="guide">💡 Toca <b>"Ya lo hice hoy"</b> cuando termines un mantenimiento. El sistema calcula solo la próxima fecha.</div><h2>Lo que toca hacer primero</h2>';
+var u=S.eq.filter(function(e){return st(e)!="ok"}).sort(function(a,b){return dias(a)-dias(b)}).slice(0,4);h+=u.map(function(e){return card(e,false)}).join("")||'<div class="empty">🎉 No hay nada pendiente</div>'}
+if(tab=="equipos"){var F=["Todos","Atrasados","Esta semana","Al día"];h+='<input class="search" placeholder="🔍 Buscar equipo o lugar" value="'+q+'" oninput="q=this.value;lista()"><div class="chips">'+F.map(function(x){return '<button class="chip'+(x==flt?' on':'')+'" onclick="flt=\''+x+'\';render()">'+x+'</button>'}).join("")+'</div><div id="ls"></div>'}
+if(tab=="ordenes"){var E3=["Pendiente","En proceso","Terminada"],C3=["warn","blue","ok"];h+='<div class="guide">💡 Toca el botón de cada orden para cambiar su estado.</div>'+(S.ord.slice().reverse().map(function(o,i){var ix=S.ord.indexOf(o);return '<div class="card '+(o.e==2?'ok':o.pr=="Alta"?'bad':'warn')+'"><div class="row"><div><div class="nm">'+o.n+'</div><div class="sb">'+o.p+'<br>👷 '+o.tec+' · Prioridad <b>'+o.pr+'</b> · '+fmt(o.d)+'</div></div><span class="pill '+C3[o.e]+'">'+E3[o.e]+'</span></div>'+(o.e<2?'<div style="margin-top:12px"><button class="btn p w" onclick="adv('+ix+')">'+(o.e==0?"▶ Empezar trabajo":"✔ Marcar como terminada")+'</button></div>':'')+'</div>'}).join("")||'<div class="empty">No hay órdenes todavía</div>')+'<button class="btn p w" style="margin-top:4px" onclick="openOrd()">➕ Nueva orden de trabajo</button>'}
+if(tab=="agenda"){var s=S.eq.slice().sort(function(a,b){return nx(a)-nx(b)});h+='<h2>Próximos mantenimientos</h2>'+s.map(function(e){var z=st(e);return '<div class="card '+z+'"><div class="row"><div><div class="nm">'+fmt(nx(e))+' · '+e.n+'</div><div class="sb">'+e.t+' · 👷 '+e.tec+'</div></div><span class="pill '+z+'">'+txt(e)+'</span></div></div>'}).join("")}
+if(tab=="historial"){h+='<h2>Lo que ya se hizo</h2>'+(S.his.slice().sort(function(a,b){return b.d-a.d}).map(function(x){return '<div class="card ok"><div class="row"><div><div class="nm">'+x.n+'</div><div class="sb">'+x.t+' · 👷 '+x.tec+'</div></div><span class="pill ok">'+fmt(x.d)+'</span></div></div>'}).join("")||'<div class="empty">Aún no hay registros</div>')}
+h+='<div class="foot">MantenPro · sistema a medida creado por IAMASTER<br><a onclick="if(confirm(\'¿Volver a los datos de ejemplo?\')){S=seed();save();render()}">Reiniciar ejemplo</a></div>';m.innerHTML=h;if(tab=="equipos")lista()}
+function lista(){var L=S.eq.filter(function(e){var s=st(e),ok=flt=="Todos"||(flt=="Atrasados"&&s=="bad")||(flt=="Esta semana"&&s=="warn")||(flt=="Al día"&&s=="ok");var t=(e.n+" "+e.a).toLowerCase();return ok&&t.indexOf(q.toLowerCase())>-1}).sort(function(a,b){return dias(a)-dias(b)});document.getElementById("ls").innerHTML=L.map(function(e){return card(e,true)}).join("")||'<div class="empty">No encontramos equipos</div>'}
+function opts(sel){return S.eq.map(function(e){return '<option value="'+e.id+'"'+(sel==e.id?' selected':'')+'>'+e.n+'</option>'}).join("")}
+function tecs(){return TEC.map(function(t){return '<option>'+t+'</option>'}).join("")}
+function openReg(){op('<h3>✅ Registrar mantenimiento</h3><p class="d">Elige el equipo que ya revisaste. Listo en 2 toques.</p><label>¿Qué equipo?</label><select id="r1">'+opts()+'</select><label>Nota (opcional)</label><input type="text" id="r2" placeholder="Ej: Todo en orden"><div class="two"><button class="btn" onclick="cl()">Cancelar</button><button class="btn g" onclick="done(+document.getElementById(\'r1\').value);cl()">✔ Guardar</button></div>')}
+var PR="Media";
+function setPr(p){PR=p;document.querySelectorAll(".seg button").forEach(function(b){b.classList.toggle("on",b.dataset.p==p)})}
+function openOrd(sel){PR="Media";op('<h3>📋 Nueva orden de trabajo</h3><p class="d">Cuenta qué falló y asigna a quién lo arregla.</p><label>¿Qué equipo?</label><select id="o1">'+opts(sel)+'</select><label>¿Qué pasa?</label><input type="text" id="o2" placeholder="Ej: Hace ruido, se calienta…"><label>¿Qué tan urgente?</label><div class="seg"><button data-p="Baja" onclick="setPr(\'Baja\')">Baja</button><button data-p="Media" class="on" onclick="setPr(\'Media\')">Media</button><button data-p="Alta" onclick="setPr(\'Alta\')">🔴 Alta</button></div><label>¿Quién lo hace?</label><select id="o3">'+tecs()+'</select><div class="two"><button class="btn" onclick="cl()">Cancelar</button><button class="btn p" onclick="saveOrd()">📋 Crear orden</button></div>')}
+function saveOrd(){var i=+document.getElementById("o1").value,e=S.eq.filter(function(x){return x.id==i})[0],p=document.getElementById("o2").value.trim();if(!p){toast("✍️ Escribe qué pasa con el equipo");return}S.ord.push({n:e.n,p:p,pr:PR,tec:document.getElementById("o3").value,e:0,d:Date.now()});save();cl();toast("📋 Orden creada para "+document.getElementById("o3").value);go("ordenes")}
+function adv(i){S.ord[i].e++;save();toast(S.ord[i].e==2?"✅ Orden terminada":"▶ Trabajo en proceso");render()}
+function openEq(){op('<h3>➕ Agregar equipo</h3><p class="d">Registra una máquina nueva para controlar su mantenimiento.</p><label>Nombre del equipo</label><input type="text" id="e1" placeholder="Ej: Bomba de agua B-05"><label>¿Dónde está?</label><input type="text" id="e2" placeholder="Ej: Cuarto de bombas"><label>¿Qué mantenimiento lleva?</label><input type="text" id="e3" placeholder="Ej: Cambio de aceite"><label>¿Cada cuántos días?</label><div class="seg"><button data-f="15" onclick="setF(15)">15</button><button data-f="30" class="on" onclick="setF(30)">30</button><button data-f="60" onclick="setF(60)">60</button><button data-f="90" onclick="setF(90)">90</button></div><div class="two"><button class="btn" onclick="cl()">Cancelar</button><button class="btn p" onclick="saveEq()">➕ Guardar equipo</button></div>');FQ=30}
+var FQ=30;function setF(f){FQ=f;document.querySelectorAll(".seg button").forEach(function(b){b.classList.toggle("on",b.dataset.f==f)})}
+function saveEq(){var n=document.getElementById("e1").value.trim();if(!n){toast("✍️ Escribe el nombre del equipo");return}S.eq.push({id:S.nid++,n:n,a:document.getElementById("e2").value.trim()||"Sin lugar",t:document.getElementById("e3").value.trim()||"Mantenimiento general",f:FQ,u:T0.getTime(),tec:TEC[S.eq.length%3]});save();cl();toast("➕ Equipo agregado");go("equipos")}
+render();
 </script></body></html>
